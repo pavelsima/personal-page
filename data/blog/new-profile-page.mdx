@@ -1,38 +1,29 @@
 ---
 title: I made new profile page
 date: '2022-10-27'
-tags: ['project', 'react', 'nextjs', 'opensource']
+tags: ['project', 'react', 'nextjs', 'opensource', 'tailwind', 'vercel']
 draft: false
 summary: Can you make it as well? Yes!!
 ---
 
 I made my new profile page with Blog in one day, here is how you can make it as well.
 
-## Inline Highlighting
+## Starter template
 
-Sample of inline highlighting `sum = parseInt(num1) + parseInt(num2)`
+Of course, I am developer, so I am lazy as f**k 😅. So after little searching, I found pretty interesting starter template based on Tailwind and NextJS, and easily customizable.
+So if you are interested in easy profile page with Blog just check out this repo: [https://github.com/timlrx/tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)
 
-## Code Blocks
+## Customations
 
-Some Javascript code
+The whole page itself is pretty simple, on homepage you have preview of first 5 blog articles and in main menu you have another 4 routes. The first route is list of all your blogs, next one is list of tags used in the blog articles -> I dont know what is that useful for... Next one is about your projects, you can configure that in `data/projectsData.js` - it is simple JSON/Object (easy to understand). Last rout is about page -> it displays informations about the author of the page, you can set it in `data/authors/default.mdx` (you can add more authors, but for our usage we won't need it).
+Back to the blog articles, you can edit, add or remove the articles in `data/blog/*` all `.mdx` files in this folder will be rendered in the blog list and will have it separate url route. About the formatting of the blog articles -> it is simple `.md` format like you have in `README.md`, in this starter template you have multiple articles with examples of formatting (I think this examples are better than me explaining it in multiple pages of borring text 😁).
+Lastly you can modify `.tsx` itself -> all main pages are in `/pages` folder and probably you will need `/layouts` folder as well.
 
-```javascript
-var num1, num2, sum
-num1 = prompt('Enter first number')
-num2 = prompt('Enter second number')
-sum = parseInt(num1) + parseInt(num2) // "+" means "add"
-alert('Sum = ' + sum) // "+" means combine into a string
-```
+## Deployment
 
-Some Python code 🐍
+After you have your page customized, have at least one blog article (for starters 😁), you can deploy your page -> for deployment you can use [Vercel](https://vercel.com/), but first wee need to push our code in some git repository, I chose the Github but for Vercel you can use GitLab or Bitbucket.
+After you created the github repository and pushed the code, you can easily create new account on [Vercel.com](https://vercel.com/) and for first project choose Github (or different VCS you are using), pick your repo and run deploy. After few moments, you can see the Next.js app is built and deployed, now you should have visible automatically generated vercel page with your app.
+I you want in Setting of the Vercel project you can set custom domain.
 
-```python
-def fib():
-    a, b = 0, 1
-    while True:            # First iteration:
-        yield a            # yield 0 to start with and then
-        a, b = b, a + b    # a will now be 1, and b will also be 1, (0 + 1)
 
-for index, fibonacci_number in zip(range(10), fib()):
-     print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
-```
+This was quick walk through, how I created this profile page, and I hope it will help you with yours -> If you want you can check my [GitHub](https://github.com/pavelsima/personal-page) with this page (for some inspiration 😎).
