@@ -1,5 +1,3 @@
-![tailwind-nextjs-banner](/public/static/images/twitter-card.png)
-
 # Pavel Sima personal page & blog
 
 Is based on [Tailwind NextJS starter blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) and deployed by Vercel.
