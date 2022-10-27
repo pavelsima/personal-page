@@ -16,13 +16,13 @@ export default function AuthorLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
-      <div className="divide-y pb-5 divide-gray-200 dark:divide-gray-700">
+      <div className="divide-y divide-gray-200 pb-5 dark:divide-gray-700">
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-        <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
+          <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
             <div className="space-y-2 pt-3 pb-0 md:space-y-5">
-                <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-                    Hello friend 👋
-                </h1>
+              <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+                Hello friend 👋
+              </h1>
             </div>
             <p>
               Welcome on my personal page, my name is {name} - Software Developer from Prague, Czech
@@ -34,8 +34,8 @@ export default function AuthorLayout({ children, content }: Props) {
             </p>
             <p>
               I am familiar with PHP, Python and C# on backend-side (and Firebase if you categorise
-              it as backend technology), for frontend I often use Vue.JS, ReactJS, Tailwind, and lately
-              I started with RedwoodJS.
+              it as backend technology), for frontend I often use Vue.JS, ReactJS, Tailwind, and
+              lately I started with RedwoodJS.
             </p>
             <p>
               <Link className="no-underline" href="/about">
@@ -50,8 +50,8 @@ export default function AuthorLayout({ children, content }: Props) {
                 🖊 My articles
               </Link>
             </p>
-        </div>
-        <div className="my-3 flex max-w-xs flex-col items-center space-x-2 overflow-hidden rounded-xl pt-2 px-2 pb-6 shadow-2xl shadow-gray-800">
+          </div>
+          <div className="my-3 flex max-w-xs flex-col items-center space-x-2 overflow-hidden rounded-xl px-2 pt-2 pb-6 shadow-2xl shadow-gray-800">
             <Image
               src={avatar}
               alt="avatar"
