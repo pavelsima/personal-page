@@ -9,28 +9,31 @@ import { NewsletterForm } from 'pliny/ui/NewsletterForm'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 
-const MAX_DISPLAY = 5
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { MDXComponents } from '@/components/MDXComponents'
+import { allAuthors } from 'contentlayer/generated'
+
+const MAX_DISPLAY = 3
+const DEFAULT_LAYOUT = 'AuthorIndex'
 
 export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const posts = allCoreContent(sortedPosts)
+  const author = allAuthors.find((p) => p.slug === 'default')
 
-  return { props: { posts } }
+  return { props: { posts, author } }
 }
 
-export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ posts, author }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
+      <MDXLayoutRenderer
+        layout={author.layout || DEFAULT_LAYOUT}
+        content={author}
+        MDXComponents={MDXComponents}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
-        </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
