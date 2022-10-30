@@ -43,7 +43,7 @@ export default function AuthorLayout({ children, content }: Props) {
               </Link>
               <br />
               <Link className="no-underline" href="/projects">
-                🪛 What have I built?
+                ⚙ What have I built?
               </Link>
               <br />
               <Link className="no-underline" href="/blog">
