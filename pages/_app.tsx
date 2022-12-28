@@ -15,6 +15,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import { GoogleAnalytics } from 'nextjs-google-analytics'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -25,19 +26,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <SearchProvider searchConfig={siteMetadata.search}>
         <LayoutWrapper>
+          <GoogleAnalytics trackPageViews />
           <Component {...pageProps} />
         </LayoutWrapper>
       </SearchProvider>
     </ThemeProvider>
-
-    <!-- Google tag (gtag.js) -->
-    <script strategy="lazyOnload" async src="https://www.googletagmanager.com/gtag/js?id=G-LN47CT2XVL"></script>
-    <script strategy="lazyOnload">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-LN47CT2XVL');
-    </script>
   )
 }
