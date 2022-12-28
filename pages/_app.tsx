@@ -15,7 +15,6 @@ import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
-import { GoogleAnalytics } from 'nextjs-google-analytics'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -26,7 +25,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <SearchProvider searchConfig={siteMetadata.search}>
         <LayoutWrapper>
-          <GoogleAnalytics trackPageViews />
           <Component {...pageProps} />
         </LayoutWrapper>
       </SearchProvider>
