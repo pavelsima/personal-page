@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.pavelsima.eu/</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/projects</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/blog</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/about</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/blog/introduction-to-GraphQL</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/graphql</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/api</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/query-language</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/opensource</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/rest</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/graphiql</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/typescript</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/express</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/blog/new-profile-page</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/project</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/react</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/nextjs</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/tailwind</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.pavelsima.eu/tags/vercel</loc>
+  <lastmod>2022-12-29T19:50:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
