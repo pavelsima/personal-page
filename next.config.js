@@ -65,6 +65,11 @@ module.exports = () => {
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
     },
+    csp: {
+      policies: {
+        'script-src': [`'self'`, `https://www.googletagmanager.com`],
+      },
+    },
     async headers() {
       return [
         {
