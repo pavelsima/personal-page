@@ -1,0 +1,141 @@
+---
+title: AI-Driven Development - Tips from My Experience
+date: '2025-11-9'
+tags: ['AI', 'development', 'productivity', 'coding', 'claude', 'MCP', 'jira']
+draft: false
+summary: Practical tips from my experience using AI for development, including connecting PM tools via MCP servers, the importance of well-defined tickets, self code reviews, and effective prompting strategies.
+---
+
+After working extensively with AI coding assistants like Claude Code, I've learned that success with AI-driven development isn't just about using the tools—it's about setting up the right workflows, maintaining quality standards, and knowing how to effectively communicate with AI. Here are some practical tips from my experience that have significantly improved my productivity and code quality.
+
+## Connect Your PM Tools as MCP Servers
+
+One of the most powerful setups I've implemented is connecting my project management tool (Jira in my case) as an MCP (Model Context Protocol) server. This allows me to tell Claude Code to start working on a ticket just by providing the ticket ID. The AI can read the ticket details, understand the requirements, and begin implementation immediately.
+
+**How it works:**
+- Set up your PM tool (Jira, Linear, etc.) as an MCP server
+- When you have a ticket ID, simply tell Claude: "Start working on ticket PROJ-123"
+- The AI fetches the ticket details and can begin coding based on the requirements
+
+This eliminates the need to copy-paste ticket descriptions and keeps everything in context. However, this only works well if your tickets are well-defined—which brings me to my next point.
+
+## Well-Defined Tickets Are More Critical Than Ever
+
+With AI doing the implementation, ticket quality becomes absolutely crucial. A poorly written ticket can lead to AI implementing something you didn't want, which means going backwards and wasting time. Here's my workflow:
+
+### Create Projects and Epics in the LLM First
+
+Before creating tickets, I use Claude to help me design the whole project or epic:
+
+1. **Describe the project/epic to Claude** - Explain the overall goal, requirements, and constraints
+2. **Let Claude prepare separate tickets** - Ask it to break down the work into well-defined, actionable tickets
+3. **Review and refine** - Go through each ticket description, ensuring they're clear and complete
+4. **Create tickets via MCP** - Use the MCP connection to create the tickets directly in your PM tool
+
+This double-checking process ensures that:
+- Each ticket has clear acceptance criteria
+- Dependencies are identified
+- The scope is appropriate
+- Technical details are specified
+
+**Why this matters:** If a ticket description is even slightly ambiguous or missing important details, the AI might implement something that doesn't match your intent. You'll end up spending more time fixing it than if you had written the ticket correctly in the first place.
+
+## Self Code Review - Now More Important Than Ever
+
+Even before AI, I was doing self code reviews—before sending code for review to team members, I'd do at least one deep review myself to catch code style issues, unnecessary comments, and other problems that linters might miss.
+
+**With AI-generated code, this is even more critical.** Here's why:
+
+- AI can generate code that looks correct but has subtle bugs
+- It might miss edge cases or business logic nuances
+- Code style might not match your team's conventions
+- Security considerations might be overlooked
+- Performance implications might not be considered
+
+**My self-review checklist:**
+1. Read through all AI-generated code line by line
+2. Understand what each piece does—don't just accept it blindly
+3. Check for code style consistency
+4. Look for unnecessary comments or verbose code
+5. Verify edge cases and error handling
+6. Consider security implications
+7. Check if the implementation matches the ticket requirements exactly
+
+This might seem like extra work, but it's much faster than having a team member find these issues during code review, or worse, discovering them in production.
+
+## Effective Prompting Strategies
+
+How you prompt the AI makes a huge difference in the quality of output. Here are strategies that work well for me:
+
+### 1. Make It Think Step by Step
+
+Instead of asking for the entire solution at once, break it down:
+- "First, analyze the current code structure"
+- "Then, identify what needs to be changed"
+- "Finally, implement the changes"
+
+This helps the AI reason through the problem more carefully and produces better results.
+
+### 2. Prepare Prompts Using Another LLM
+
+Before asking Claude Code to implement something complex, I often use another LLM (or even Claude itself) to help me craft a better prompt:
+
+- "Help me create a detailed prompt for Claude Code to implement [feature]. The prompt should include..."
+- This meta-prompting approach results in clearer, more structured instructions
+
+### 3. Let the AI Ask Questions First
+
+Before coding starts, encourage the AI to ask clarifying questions:
+- "Before you start coding, please ask me any questions about the requirements or implementation approach"
+- This prevents misunderstandings and ensures the AI has all necessary context
+
+### 4. Maintain Domain Context Files
+
+Keep domain-specific context in markdown files that you can reference:
+- Create `DOMAIN.md` or `ARCHITECTURE.md` files with important context
+- Reference these files in your prompts: "Please read `DOMAIN.md` for context about our business logic"
+- This prevents the AI from scanning all files and gives it focused, relevant information
+
+### 5. Customize Agent Behavior with CLAUDE.md
+
+Create a `CLAUDE.md` file in your project root to customize how Claude behaves:
+- Define coding standards and conventions
+- Specify architectural patterns to follow
+- Set preferences for testing, error handling, etc.
+- Claude will read this file and adapt its behavior accordingly
+
+Example `CLAUDE.md`:
+```markdown
+# Project Guidelines
+
+- Use TypeScript with strict mode
+- Prefer functional programming patterns
+- Always include error handling
+- Write tests for all new features
+- Follow our existing code structure
+```
+
+## The Double and Triple Check Principle
+
+With AI-generated code, I've adopted a principle of double or even triple checking:
+
+1. **First check:** Review the AI's implementation plan or approach before it starts coding
+2. **Second check:** Review the generated code thoroughly
+3. **Third check:** Test and verify the implementation matches requirements
+
+This might seem excessive, but it's faster than fixing issues later. The time spent on careful review upfront saves hours of debugging and refactoring.
+
+## Additional Tips
+
+- **Start small:** Begin with simple tasks and gradually increase complexity as you learn what works
+- **Iterate on prompts:** If the first output isn't right, refine your prompt rather than manually fixing the code
+- **Keep learning:** AI tools are evolving rapidly—stay updated on new features and best practices
+- **Share knowledge:** Document what works for your team and create shared prompt templates
+
+## Conclusion
+
+AI-driven development can be incredibly powerful, but it requires discipline and the right workflows. The key is treating AI as a highly capable but imperfect pair programmer that needs clear instructions and careful oversight.
+
+The most important lesson I've learned: **the quality of your input (tickets, prompts, context) directly determines the quality of AI output.** Invest time in setting up good processes, and you'll see significant productivity gains while maintaining code quality.
+
+There are many more detailed strategies and techniques for each of these areas—I'll be covering them in future posts. For now, start with connecting your PM tools, improving your ticket descriptions, and establishing a solid self-review process. These three things alone will make a huge difference in your AI-assisted development workflow.

@@ -1,26 +1,33 @@
 const projectsData = [
   {
+    title: 'NICE Bot Builder',
+    description: `Bot builder app I am working on as Software Engineer for NICE Systems Ltd. Made in VueJS based on PHP Laravel backend and Rasa framework.`,
+    imgSrc: '/static/images/NICE.png',
+    href: 'https://www.nice.com/cxone-mpower-agents',
+    type: 'work',
+  },
+  {
     title: 'Easy Redmine',
-    description: `Project management app I was working on Frontend for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
+    description: `Project management app I was working on as Frontend Developer for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
     imgSrc: '/static/images/er.png',
     href: 'https://easyredmine.com/',
     type: 'work',
   },
   {
     title: 'Easy Project',
-    description: `Project management app I was working on Frontend for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
+    description: `Project management app I was working on as Frontend Developer for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
     imgSrc: '/static/images/ep.png',
     href: 'https://easyproject.com/',
     type: 'work',
   },
   {
     title: 'Calculoid',
-    description: `Calculator/Form editor app where I was working Full-stack (Chief Developer) for EasySoftware Ltd. It was made in AngularJS and PHP for backend (Joomla framework).`,
+    description: `Calculator/Form editor app where I was working as Calculoid Chief Developer for EasySoftware Ltd. It was made in AngularJS and PHP for backend (Joomla framework).`,
     imgSrc: '/static/images/calc.png',
     href: 'https://calculoid.com/',
     type: 'work',
   },
-  {
+  /*{
     title: 'Steam API',
     description: `API for search, and fetching app/reviews/news data from store.steampowered.com, hosted on rapidapi.com. `,
     imgSrc: '/static/images/SteamApi.jpg',
@@ -33,7 +40,7 @@ const projectsData = [
     imgSrc: '/static/images/EpicGamesStoreApi.jpg',
     href: 'https://rapidapi.com/psimavel/api/epic-games-store/',
     type: 'personal',
-  },
+  },*/
   {
     title: 'Split Pay',
     description: `Opensource small project for creating payment links with all necessary informations. It can generate SEPA, SPD and also allow pay via PayPal.`,
