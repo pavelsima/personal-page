@@ -53,7 +53,7 @@ export default function AuthorIndex({ content, posts }: Props) {
 
         <aside className="avatar-card glass-card-lg hero-load-card">
           <div className="avatar-frame">
-            <Image src={avatar} alt={name} width="320px" height="320px" className="avatar-img" />
+            <Image src={avatar} alt={name} layout="fill" objectFit="cover" className="avatar-img" />
           </div>
           <div className="avatar-meta">
             <div className="avatar-name">{name}</div>

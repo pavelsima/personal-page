@@ -5,13 +5,17 @@ import Footer from './Footer'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { ReactNode, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 interface Props {
   children: ReactNode
 }
 
 const LayoutWrapper = ({ children }: Props) => {
+  const router = useRouter()
+
   // Reveal-on-scroll for [data-reveal] and [data-stagger] descendants.
+  // Re-run on route change so navigated pages get their .reveal elements observed.
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -31,7 +35,7 @@ const LayoutWrapper = ({ children }: Props) => {
     )
     document.querySelectorAll('.reveal, .stagger').forEach((el) => io.observe(el))
     return () => io.disconnect()
-  }, [])
+  }, [router.pathname])
 
   return (
     <>
