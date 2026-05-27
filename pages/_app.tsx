@@ -5,8 +5,6 @@ import 'katex/dist/katex.css'
 import '@/css/docsearch.css'
 import '@docsearch/css'
 
-import '@fontsource/inter/variable-full.css'
-
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -18,9 +16,14 @@ import LayoutWrapper from '@/components/LayoutWrapper'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+    <ThemeProvider
+      attribute="data-theme"
+      defaultTheme={siteMetadata.theme}
+      enableSystem={false}
+      themes={['dark', 'light']}
+    >
       <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
       </Head>
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <SearchProvider searchConfig={siteMetadata.search}>

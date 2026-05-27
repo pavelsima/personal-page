@@ -1,83 +1,118 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
 
-  const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        document.body.style.overflow = 'auto'
-      } else {
-        // Prevent scrolling
-        document.body.style.overflow = 'hidden'
-      }
-      return !status
-    })
-  }
+  useEffect(() => {
+    document.body.style.overflow = navShow ? 'hidden' : 'auto'
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [navShow])
+
+  const onToggleNav = () => setNavShow((s) => !s)
 
   return (
-    <div className="sm:hidden">
+    <div className="mobile-nav-root sm:hidden">
       <button
         type="button"
-        className="ml-1 mr-1 h-8 w-8 rounded py-1"
-        aria-label="Toggle Menu"
+        className="mobile-nav-btn"
+        aria-label="Toggle menu"
+        aria-expanded={navShow}
         onClick={onToggleNav}
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="text-gray-900 dark:text-gray-100"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
         >
-          <path
-            fillRule="evenodd"
-            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-            clipRule="evenodd"
-          />
+          {navShow ? (
+            <path d="M6 6l12 12M6 18L18 6" />
+          ) : (
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          )}
         </svg>
       </button>
-      <div
-        className={`fixed top-0 left-0 z-10 h-full w-full transform bg-gray-200 opacity-95 duration-300 ease-in-out dark:bg-gray-800 ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex justify-end">
-          <button
-            type="button"
-            className="mr-5 mt-11 h-8 w-8 rounded"
-            aria-label="Toggle Menu"
-            onClick={onToggleNav}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
-        <nav className="fixed mt-8 h-full">
+      <div className={`mobile-nav-panel ${navShow ? 'open' : ''}`} aria-hidden={!navShow}>
+        <nav className="mobile-nav-links" aria-label="Mobile">
           {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
-              <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={onToggleNav}
-              >
-                {link.title}
-              </Link>
-            </div>
+            <Link key={link.title} href={link.href} onClick={onToggleNav}>
+              {link.title}
+            </Link>
           ))}
         </nav>
       </div>
+
+      <style jsx>{`
+        .mobile-nav-btn {
+          width: 36px;
+          height: 36px;
+          margin-left: 6px;
+          border-radius: 50%;
+          border: 1px solid var(--border);
+          background: var(--glass);
+          backdrop-filter: blur(12px);
+          color: var(--text);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .mobile-nav-btn:hover {
+          border-color: var(--border-strong);
+        }
+        .mobile-nav-btn svg {
+          width: 16px;
+          height: 16px;
+        }
+        .mobile-nav-panel {
+          position: fixed;
+          inset: 0;
+          z-index: 100;
+          background: var(--glass-strong);
+          backdrop-filter: blur(28px) saturate(160%);
+          -webkit-backdrop-filter: blur(28px) saturate(160%);
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-10px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .mobile-nav-panel.open {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+        .mobile-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+        .mobile-nav-links :global(a) {
+          font-family: 'Geist', sans-serif;
+          font-size: 28px;
+          font-weight: 500;
+          letter-spacing: -0.02em;
+          color: var(--text);
+          padding: 10px 24px;
+          border-radius: 999px;
+          text-decoration: none;
+          transition: background 0.2s ease;
+        }
+        .mobile-nav-links :global(a:hover) {
+          background: var(--glass);
+        }
+      `}</style>
     </div>
   )
 }

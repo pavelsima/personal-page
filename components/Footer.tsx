@@ -1,25 +1,43 @@
-import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
-import SocialIcon from '@/components/social-icons'
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
-        <div className="mb-3 flex space-x-4">
-          <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
-          <SocialIcon kind="github" href={siteMetadata.github} size={6} />
-          <SocialIcon kind="facebook" href={siteMetadata.facebook} size={6} />
-          <SocialIcon kind="youtube" href={siteMetadata.youtube} size={6} />
-          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-          <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
-        </div>
-        <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="/">{siteMetadata.title}</Link>
-          <div>{` • `}</div>
-          <div>{`© ${new Date().getFullYear()}`}</div>
-        </div>
+    <footer className="site-footer">
+      <div className="site-container site-footer-inner">
+        <span>
+          {siteMetadata.title} · © {new Date().getFullYear()}
+        </span>
+        <span>
+          Designed &amp; built in Prague ·{' '}
+          <span style={{ color: 'var(--accent)' }} aria-hidden="true">
+            ●
+          </span>{' '}
+          Available for chat
+        </span>
       </div>
+      <style jsx>{`
+        .site-footer {
+          padding: 32px 0 48px;
+          border-top: 1px solid var(--border);
+          margin-top: 64px;
+        }
+        .site-footer-inner {
+          font-family: 'Geist Mono', monospace;
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          color: var(--text-faint);
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        @media (max-width: 640px) {
+          .site-footer-inner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+      `}</style>
     </footer>
   )
 }

@@ -1,19 +1,13 @@
-import { useState, ReactNode } from 'react'
+import { useEffect, useState, ReactNode } from 'react'
 import { Comments } from 'pliny/comments'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
-import Image from '@/components/Image'
-import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
-const discussUrl = (path) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -30,145 +24,236 @@ interface LayoutProps {
   children: ReactNode
 }
 
+function ReadingProgress() {
+  const [progress, setProgress] = useState(0)
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement
+      const scrolled = h.scrollTop
+      const height = h.scrollHeight - h.clientHeight
+      setProgress(height > 0 ? Math.min(100, (scrolled / height) * 100) : 0)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return <div className="reading-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
+}
+
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
+  const { filePath, path, slug, date, title, tags, summary, readingTime } = content as CoreContent<Blog> & {
+    readingTime?: { text: string }
+  }
   const basePath = path.split('/')[0]
   const [loadComments, setLoadComments] = useState(false)
+  const primaryTag = tags && tags[0]
 
   return (
-    <SectionContainer>
+    <>
       <BlogSEO url={`${siteMetadata.siteUrl}/${path}`} authorDetails={authorDetails} {...content} />
+      <ReadingProgress />
       <ScrollTopAndComment />
-      <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
-                  </dd>
-                </div>
-              </dl>
-              <div>
-                <PageTitle>{title}</PageTitle>
-              </div>
-            </div>
-          </header>
-          <div
-            className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-            style={{ gridTemplateRows: 'auto 1fr' }}
-          >
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-              <dt className="sr-only">Authors</dt>
-              <dd>
-                <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width="38px"
-                          height="38px"
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
-                        <dd>
-                          {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            >
-                              {author.twitter.replace('https://twitter.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </dl>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(path)} rel="nofollow">
-                  {'Discuss on Twitter'}
-                </Link>
-                {` • `}
-                <Link href={editUrl(filePath)}>{'View on GitHub'}</Link>
-              </div>
-              {siteMetadata.comments && (
-                <div
-                  className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
-                  {!loadComments && (
-                    <button onClick={() => setLoadComments(true)}>Load Comments</button>
-                  )}
-                  {loadComments && <Comments commentsConfig={siteMetadata.comments} slug={slug} />}
-                </div>
+
+      <div className="site-container">
+        <article>
+          <header className="post-header">
+            <div className="post-meta-row">
+              <time dateTime={date}>
+                {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+              </time>
+              {readingTime?.text && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>{readingTime.text}</span>
+                </>
+              )}
+              {primaryTag && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span className="primary-tag">{primaryTag}</span>
+                </>
               )}
             </div>
-            <footer>
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Previous Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Next Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
+            <h1 className="post-title">{title}</h1>
+            {summary && <p className="post-lede">{summary}</p>}
+            {tags && tags.length > 0 && (
+              <div className="post-tags">
+                {tags.map((t) => (
+                  <span key={t} className="chip chip-sm">
+                    {t}
+                  </span>
+                ))}
               </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                >
-                  &larr; Back to the blog
-                </Link>
-              </div>
-            </footer>
+            )}
+          </header>
+
+          <div className="post-body prose prose-pavel">{children}</div>
+
+          <div className="post-extras">
+            <Link href={editUrl(filePath)}>
+              <a className="more-link">
+                View on GitHub <span className="arrow">↗</span>
+              </a>
+            </Link>
           </div>
-        </div>
-      </article>
-    </SectionContainer>
+
+          {siteMetadata.comments && (
+            <div className="post-comments" id="comment">
+              {!loadComments && (
+                <button className="btn" onClick={() => setLoadComments(true)}>
+                  Load Comments
+                </button>
+              )}
+              {loadComments && <Comments commentsConfig={siteMetadata.comments} slug={slug} />}
+            </div>
+          )}
+
+          <footer className="post-footer">
+            {(prev || next) && (
+              <nav className="post-prevnext" aria-label="Other articles">
+                {prev && (
+                  <Link href={`/${prev.path}`}>
+                    <a className="glass-card lifts pn-card">
+                      <span className="pn-label">← Previous</span>
+                      <span className="pn-title">{prev.title}</span>
+                    </a>
+                  </Link>
+                )}
+                {next && (
+                  <Link href={`/${next.path}`}>
+                    <a className="glass-card lifts pn-card pn-card-next">
+                      <span className="pn-label">Next →</span>
+                      <span className="pn-title">{next.title}</span>
+                    </a>
+                  </Link>
+                )}
+              </nav>
+            )}
+            <div className="post-back">
+              <Link href={`/${basePath}`}>
+                <a className="more-link">
+                  <span className="arrow">←</span> All posts
+                </a>
+              </Link>
+            </div>
+          </footer>
+        </article>
+      </div>
+
+      <style jsx>{`
+        article {
+          max-width: 760px;
+          margin: 0 auto;
+          padding: 32px 0 80px;
+        }
+        .post-header {
+          padding: 24px 0 48px;
+          text-align: center;
+        }
+        .post-meta-row {
+          display: inline-flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          font-family: 'Geist Mono', monospace;
+          font-size: 12px;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: var(--text-faint);
+          padding: 6px 14px;
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          background: var(--glass);
+        }
+        .post-meta-row .primary-tag {
+          color: var(--accent);
+        }
+        .post-title {
+          font-family: 'Geist', sans-serif;
+          font-weight: 500;
+          font-size: clamp(36px, 5.4vw, 56px);
+          line-height: 1.1;
+          letter-spacing: -0.025em;
+          color: var(--text);
+          margin: 24px 0 16px;
+        }
+        .post-lede {
+          font-size: 19px;
+          line-height: 1.6;
+          color: var(--text-muted);
+          max-width: 620px;
+          margin: 0 auto 24px;
+        }
+        .post-tags {
+          display: inline-flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 6px;
+        }
+        .post-body {
+          padding: 32px 0;
+          font-size: 18px;
+          line-height: 1.75;
+          color: var(--text-muted);
+        }
+        .post-extras {
+          padding: 24px 0 12px;
+          border-top: 1px solid var(--border);
+          display: flex;
+          justify-content: flex-end;
+        }
+        .post-comments {
+          padding: 24px 0;
+          text-align: center;
+        }
+        .post-footer {
+          padding: 32px 0 0;
+        }
+        .post-prevnext {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+        .pn-card {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          text-decoration: none;
+          color: inherit;
+        }
+        .pn-card-next {
+          text-align: right;
+        }
+        .pn-label {
+          font-family: 'Geist Mono', monospace;
+          font-size: 11px;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: var(--text-faint);
+        }
+        .pn-title {
+          font-size: 16px;
+          font-weight: 500;
+          color: var(--text);
+          line-height: 1.3;
+        }
+        .post-back {
+          padding-top: 16px;
+        }
+        @media (max-width: 640px) {
+          article {
+            padding: 16px 0 56px;
+          }
+          .post-prevnext {
+            grid-template-columns: 1fr;
+          }
+          .pn-card-next {
+            text-align: left;
+          }
+        }
+      `}</style>
+    </>
   )
 }

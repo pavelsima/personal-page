@@ -16,23 +16,45 @@ const components = {
   twitter: Twitter,
 }
 
-const SocialIcon = ({ kind, href, size = 8 }) => {
+const SocialIcon = ({ kind, href, size = 6 }) => {
   if (!href || (kind === 'mail' && !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href)))
     return null
 
   const SocialSvg = components[kind]
+  const px = size * 4 // tailwind-ish size unit
 
   return (
     <a
-      className="text-sm text-gray-500 transition hover:text-gray-600"
+      className="social-icon"
       target="_blank"
       rel="noopener noreferrer"
       href={href}
+      aria-label={kind}
     >
-      <span className="sr-only">{kind}</span>
       <SocialSvg
-        className={`fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 h-${size} w-${size}`}
+        style={{ width: `${px}px`, height: `${px}px` }}
+        className="fill-current"
       />
+      <style jsx>{`
+        .social-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--text-muted);
+          border: 1px solid transparent;
+          transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+            transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+        .social-icon:hover {
+          color: var(--text);
+          background: var(--glass);
+          border-color: var(--border);
+          transform: translateY(-3px);
+        }
+      `}</style>
     </a>
   )
 }

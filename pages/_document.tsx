@@ -4,8 +4,14 @@ import Script from 'next/script'
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en" className="scroll-smooth">
+      <Html lang="en" className="scroll-smooth" data-theme="dark">
         <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
+            rel="stylesheet"
+          />
           <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
           <link
             rel="icon"
@@ -22,9 +28,15 @@ class MyDocument extends Document {
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#000000" />
-          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ec" />
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0c14" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+          {/* Pre-paint theme so the dark/light flash is avoided. */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+            }}
+          />
           {/* eslint-disable-next-line @next/next/inline-script-id */}
           <Script
             strategy="afterInteractive"
@@ -39,7 +51,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body className="bg-white text-black antialiased dark:bg-gray-900 dark:text-white">
+        <body className="antialiased">
           <Main />
           <NextScript />
         </body>

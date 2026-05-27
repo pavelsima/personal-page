@@ -1,59 +1,78 @@
-const projectsData = [
+export type ProjectType = 'work' | 'personal'
+
+export interface Project {
+  title: string
+  description: string
+  imgSrc: string
+  href: string
+  type: ProjectType
+  role?: string
+  tags?: string[]
+  repo?: string
+}
+
+const projectsData: Project[] = [
   {
     title: 'NICE Bot Builder',
-    description: `Bot builder app I am working on as Software Engineer for NICE Systems Ltd. Made in VueJS based on PHP Laravel backend and Rasa framework.`,
+    description:
+      'Chatbot-building platform with full lifecycle support — built in Vue.js with a Laravel backend and the Rasa framework. Also led PoC work on a no-code MCP tool builder (Nuxt + NestJS + GraphQL).',
     imgSrc: '/static/images/NICE.png',
     href: 'https://www.nice.com/cxone-mpower-agents',
     type: 'work',
+    role: 'Senior Software Engineer · 2022 — Present',
+    tags: ['Vue.js', 'Laravel', 'Rasa', 'GraphQL'],
   },
   {
     title: 'Easy Redmine',
-    description: `Project management app I was working on as Frontend Developer for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
+    description:
+      'Project management app I worked on as Frontend Developer at Easy Software. Vue.js, SASS, GraphQL, and Storybook on the cloud + on-prem versions.',
     imgSrc: '/static/images/er.png',
     href: 'https://easyredmine.com/',
     type: 'work',
+    role: 'Frontend Developer · 2020 — 2022',
+    tags: ['Vue.js', 'GraphQL', 'SCSS', 'Storybook'],
   },
   {
     title: 'Easy Project',
-    description: `Project management app I was working on as Frontend Developer for EasySoftware Ltd. Made in VueJS, SASS, GraphQL and Storybook.`,
+    description:
+      'Project management app shipped alongside Easy Redmine. Same Vue.js + GraphQL stack, shared component library, with separate product surface for project teams.',
     imgSrc: '/static/images/ep.png',
     href: 'https://easyproject.com/',
     type: 'work',
+    role: 'Frontend Developer · 2020 — 2022',
+    tags: ['Vue.js', 'GraphQL', 'SCSS', 'Storybook'],
   },
   {
     title: 'Calculoid',
-    description: `Calculator/Form editor app where I was working as Calculoid Chief Developer for EasySoftware Ltd. It was made in AngularJS and PHP for backend (Joomla framework).`,
+    description:
+      'Calculator / form editor app where I led development as Calculoid Chief Developer at Easy Software. Built in AngularJS and Vue.js with a PHP (Joomla) backend.',
     imgSrc: '/static/images/calc.png',
     href: 'https://calculoid.com/',
     type: 'work',
+    role: 'Calculoid Chief Developer · 2018 — 2020',
+    tags: ['AngularJS', 'Vue.js', 'PHP'],
   },
-  /*{
-    title: 'Steam API',
-    description: `API for search, and fetching app/reviews/news data from store.steampowered.com, hosted on rapidapi.com. `,
-    imgSrc: '/static/images/SteamApi.jpg',
-    href: 'https://rapidapi.com/psimavel/api/steam2',
-    type: 'personal',
-  },
-  {
-    title: 'Epic Games store API',
-    description: `API for search games/bundles/editors in Epic Games store, you can fetch latest news from the platform and present free games, hosted on rapidapi.com`,
-    imgSrc: '/static/images/EpicGamesStoreApi.jpg',
-    href: 'https://rapidapi.com/psimavel/api/epic-games-store/',
-    type: 'personal',
-  },*/
   {
     title: 'Split Pay',
-    description: `Opensource small project for creating payment links with all necessary informations. It can generate SEPA, SPD and also allow pay via PayPal.`,
+    description:
+      'Open-source web app for creating shareable payment links with all the info baked in — generates SEPA, SPD QR codes and supports PayPal.',
     imgSrc: '/static/images/splitpay.png',
     href: 'https://splitpay.link/',
     type: 'personal',
+    role: 'Personal · open source',
+    tags: ['Vue.js', 'TypeScript', 'Firebase'],
+    repo: 'https://github.com/pavelsima/splitpay',
   },
   {
-    title: 'Pku Limiter',
-    description: `Opensource mobile app for counting PHE/protein for Phenylketonuria. My personal project, it is mostly for my need counting daily PHE/protein (protein for simlification).`,
+    title: 'PKU Limiter',
+    description:
+      'Open-source mobile app for counting PHE / protein for Phenylketonuria — built for daily use, helps follow strict dietary restrictions.',
     imgSrc: '/static/images/time-machine.jpg',
     href: 'https://github.com/pavelsima/PkuLimiter',
     type: 'personal',
+    role: 'Personal · open source',
+    tags: ['React', 'Ionic', 'Capacitor'],
+    repo: 'https://github.com/pavelsima/PkuLimiter',
   },
 ]
 

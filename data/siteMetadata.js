@@ -5,7 +5,8 @@ const siteMetadata = {
   title: 'Pavel Sima',
   author: 'Pavel Sima',
   headerTitle: '',
-  description: 'Welcome on my personal page, my name is Pavel Sima - Software Developer from Prague, Czech Republic.',
+  description:
+    'Pavel Sima — Senior Full-stack Developer from Prague. Vue.js, TypeScript, Node.js, Laravel; React on the side. Lately deep in AI-driven development with Claude Code and MCP.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
   siteUrl: 'https://pavelsima.eu/',

@@ -1,59 +1,79 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/public/static/images/logo.png'
 import Link from './Link'
-import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-import Image from 'next/image'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 interface Props {
   children: ReactNode
 }
 
 const LayoutWrapper = ({ children }: Props) => {
+  // Reveal-on-scroll for [data-reveal] and [data-stagger] descendants.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document
+        .querySelectorAll('.reveal, .stagger')
+        .forEach((el) => el.classList.add('in'))
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in')
+            io.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+    )
+    document.querySelectorAll('.reveal, .stagger').forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <SectionContainer>
-      <div className="flex h-screen flex-col justify-between">
-        <header className="flex items-center justify-between py-10">
-          <div>
-            <Link href="/" aria-label={siteMetadata.headerTitle}>
-              <div className="flex items-center justify-between">
-                <div className="mr-3">
-                  <Image src="/static/images/logo.png" width="140px" height="70px" />
-                </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="hidden h-6 text-2xl font-semibold sm:block">
-                    {siteMetadata.headerTitle}
-                  </div>
-                ) : (
-                  siteMetadata.headerTitle
-                )}
-              </div>
-            </Link>
-          </div>
-          <div className="flex items-center text-base leading-5">
-            <div className="hidden sm:block">
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+
+      <div className="atmosphere" aria-hidden="true">
+        <div className="blob blob-1" />
+        <div className="blob blob-2" />
+        <div className="blob blob-3" />
+      </div>
+      <div className="grain" aria-hidden="true" />
+
+      <header className="nav">
+        <div className="site-container nav-inner">
+          <Link href="/" aria-label={`${siteMetadata.title}, home`}>
+            <span className="logo">
+              <span className="logo-dot" aria-hidden="true" />
+              <span>pavel&nbsp;sima</span>
+            </span>
+          </Link>
+          <nav className="nav-links" aria-label="Primary">
+            <span className="hidden sm:contents">
               {headerNavLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
-                >
+                <Link key={link.title} href={link.href}>
                   {link.title}
                 </Link>
               ))}
-            </div>
-            {/* <ThemeSwitch /> */}
+            </span>
+            <ThemeSwitch />
             <MobileNav />
-          </div>
-        </header>
-        <main className="mb-auto">{children}</main>
-        <Footer />
-      </div>
-    </SectionContainer>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main">{children}</main>
+
+      <Footer />
+    </>
   )
 }
 
