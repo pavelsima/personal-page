@@ -1,0 +1,71 @@
+---
+title: I redesigned my profile page in under an hour — with Claude
+date: '2026-05-27'
+tags: ['AI', 'claude', 'design', 'nextjs', 'workflow', 'productivity']
+draft: false
+summary: How I went from an outdated profile page to a fully redesigned, animated, minimalist site in under an hour — using Claude for design ideation, HTML preview, a design system document, and finally Claude Code for implementation.
+---
+
+My old profile page worked. It had the content, it had the links, it did the job. But it looked like a starter template that nobody bothered to touch — because it was. I'd been meaning to redesign it for a while, and last week I finally did. Start to finish: under an hour. Here's exactly how.
+
+## Step 1: Let Claude audit the existing page
+
+I started in Claude (the web app, not the CLI). I pasted in my current page structure and told it to get familiar with the content — who I am, what I do, the vibe I was going for.
+
+Then I asked it to redesign the page. But instead of just running with it, I told it to **ask me questions first**. What aesthetic? Dark or light? What should the hero look like? Should there be animations? What's the hierarchy of information?
+
+This part is important. AI will fill in assumptions if you let it. By making it ask, you end up with a design that's actually yours — not a generic "modern portfolio" template. We landed on: dark-first, minimalist, glassmorphism cards, subtle scroll-reveal animations, same content and structure but visually elevated.
+
+## Step 2: HTML preview — iterate visually, not in code
+
+Claude generated a **self-contained HTML file** — everything inline, no build step, no dependencies. I opened it in the browser, looked at it, and gave feedback directly in the chat.
+
+> "The hero text is too centered, I want it left-aligned. Make the avatar card feel more like a business card. The timeline needs more breathing room."
+
+A few rounds of back-and-forth and the preview matched exactly what I wanted. This is the key workflow: **iterate on the design in HTML first**, before touching your actual codebase. It's fast, it's visual, and you're not fighting your framework while trying to make design decisions.
+
+## Step 3: Generate a `design.md` from the final preview
+
+Once I was happy with the HTML preview, I asked Claude to generate a `design.md` file — a design system document derived from the preview that captures:
+
+- Color tokens and CSS variables
+- Typography scale and font choices
+- Component patterns (cards, chips, buttons, section layouts)
+- Animation conventions (reveal-on-scroll, stagger timing, hero load sequence)
+- Spacing and grid decisions
+
+The purpose of this document isn't just documentation — it's a **contract for Claude Code**. When implementing new pages or components later, Claude Code can read `design.md` and stay consistent with the existing design language without me repeating myself every time.
+
+## Step 4: Hand it to Claude Code
+
+With the HTML preview and `design.md` in the repo, I switched to Claude Code (Sonnet 4.6 via the CLI). The prompt was essentially:
+
+> "Here's the HTML preview of the redesign. Here's the design.md. Implement this as the new homepage and about page. The preview is the source of truth — match it as closely as possible."
+
+Claude Code planned the work first, which I reviewed and approved. Then it executed: ported the styles into Tailwind + custom CSS, rebuilt the components in React/Next.js, wired up the animations, connected the real content from contentlayer.
+
+The advantage of having a concrete HTML preview to reference is that Claude Code can **copy-paste logic directly** — the CSS variables, the animation keyframes, the component structure. It's not guessing what "minimalist with glassmorphism" means. It has a pixel-perfect reference.
+
+## Step 5: A few small fixes and content updates
+
+The implementation came out ~90% right on the first pass. A few things needed tweaking — some mobile spacing, a z-index issue with the mobile nav, an image not filling its frame. These were quick follow-up prompts, each fixed in seconds.
+
+I also updated the content itself — experience timeline, stack list, bio copy — which took longer than the actual implementation.
+
+## The full workflow, summarised
+
+1. **Claude (web)** — audit existing page, ask design questions, align on aesthetic
+2. **Claude (web)** — generate HTML preview, iterate visually until it's right
+3. **Claude (web)** — produce `design.md` as a design contract for future implementation
+4. **Claude Code** — implement the design using the HTML as reference and `design.md` for guidelines
+5. **Claude Code** — small fixes, content updates, done
+
+## Why this works
+
+The HTML preview step is the real unlock. It separates *design decisions* from *implementation work*. You make all the design calls in a lightweight, fast-feedback loop before any real code is written. By the time Claude Code starts working, the design is settled — it's just execution.
+
+The `design.md` document means the design doesn't live only in the implemented code. It's explicit, readable, and reusable. Every new page I add will stay consistent without me having to reverse-engineer the existing styles.
+
+Total time: under an hour. Most of it was me giving feedback on the preview and tweaking copy.
+
+If you've been putting off a redesign because it feels like a big project — it doesn't have to be.
