@@ -412,7 +412,7 @@ button:focus-visible,
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: var(--text-faint);
+  color: var(--text-muted);
   text-transform: uppercase;
   border-style: dashed;
   background: transparent;
