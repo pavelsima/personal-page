@@ -226,7 +226,7 @@ export default function AuthorIndex({ content, posts }: Props) {
           Say <em>hello</em> →
         </h2>
         <a href={`mailto:${email}`} className="email-link">
-          {email}
+          Get in touch
           <span className="arrow">↗</span>
         </a>
         <div className="socials-big">

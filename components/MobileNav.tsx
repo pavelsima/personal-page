@@ -51,8 +51,8 @@ const MobileNav = () => {
           height: 36px;
           margin-left: 6px;
           border-radius: 50%;
-          border: 1px solid var(--border);
-          background: var(--glass);
+          border: 1px solid var(--border-strong);
+          background: var(--glass-strong);
           backdrop-filter: blur(12px);
           color: var(--text);
           display: inline-flex;
