@@ -18,10 +18,7 @@ export default function Projects() {
 
   return (
     <>
-      <PageSEO
-        title={`Projects — ${siteMetadata.author}`}
-        description={siteMetadata.description}
-      />
+      <PageSEO title={`Projects — ${siteMetadata.author}`} description={siteMetadata.description} />
       <div className="site-container">
         <section className="projects-hero hero-load">
           <span className="eyebrow">01 · work</span>

@@ -41,9 +41,10 @@ function ReadingProgress() {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, summary, readingTime } = content as CoreContent<Blog> & {
-    readingTime?: { text: string }
-  }
+  const { filePath, path, slug, date, title, tags, summary, readingTime } =
+    content as CoreContent<Blog> & {
+      readingTime?: { text: string }
+    }
   const basePath = path.split('/')[0]
   const [loadComments, setLoadComments] = useState(false)
   const primaryTag = tags && tags[0]
@@ -87,7 +88,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
             )}
           </header>
 
-          <div className="post-body prose prose-pavel">{children}</div>
+          <div className="post-body prose-pavel prose">{children}</div>
 
           <div className="post-extras">
             <Link href={editUrl(filePath)}>

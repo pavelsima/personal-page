@@ -95,8 +95,7 @@ export default function ListLayout({
   const renderedEyebrow = eyebrow ?? '02 · writing'
   const renderedHeadlineText = headline ?? (title === 'All Posts' ? 'Writing' : title)
   const renderedLede =
-    lede ??
-    "Notes on building software, AI-driven development, and whatever's caught my attention."
+    lede ?? "Notes on building software, AI-driven development, and whatever's caught my attention."
   const [searchValue, setSearchValue] = useState('')
   const filtered = useMemo(
     () =>
@@ -167,9 +166,7 @@ export default function ListLayout({
                             ))}
                           </div>
                           <span className="sr-only">
-                            <time dateTime={date}>
-                              {formatDate(date, siteMetadata.locale)}
-                            </time>
+                            <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
                           </span>
                         </div>
                         <div className="post-body">

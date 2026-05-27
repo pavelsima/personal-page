@@ -31,10 +31,7 @@ const SocialIcon = ({ kind, href, size = 6 }) => {
       href={href}
       aria-label={kind}
     >
-      <SocialSvg
-        style={{ width: `${px}px`, height: `${px}px` }}
-        className="fill-current"
-      />
+      <SocialSvg style={{ width: `${px}px`, height: `${px}px` }} className="fill-current" />
       <style jsx>{`
         .social-icon {
           width: 44px;

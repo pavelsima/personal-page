@@ -59,7 +59,15 @@ const education = [
 const stackGroups: { label: string; items: string[] }[] = [
   {
     label: 'frontend',
-    items: ['Vue.js', 'React', 'TypeScript', 'Capacitor / Cordova', 'Storybook', 'Vue Query', 'TanStack Query'],
+    items: [
+      'Vue.js',
+      'React',
+      'TypeScript',
+      'Capacitor / Cordova',
+      'Storybook',
+      'Vue Query',
+      'TanStack Query',
+    ],
   },
   { label: 'styles', items: ['Tailwind', 'SCSS', 'Less', 'PostCSS'] },
   { label: 'apis', items: ['GraphQL', 'REST'] },
@@ -93,10 +101,10 @@ export default function AuthorLayout({ content }: Props) {
               Hello <span className="italic-accent">again</span>.
             </h1>
             <p className="about-lede">
-              I'm a frontend-focused developer with 9+ years of experience — Vue.js is my main
-              stack and where I have the most seniority. I can go full-stack when a project needs
-              it: Node.js, Laravel, and the occasional Python or RedwoodJS. React when the project
-              asks for it.
+              I'm a frontend-focused developer with 9+ years of experience — Vue.js is my main stack
+              and where I have the most seniority. I can go full-stack when a project needs it:
+              Node.js, Laravel, and the occasional Python or RedwoodJS. React when the project asks
+              for it.
             </p>
             <p className="about-lede">
               Lately I've been focusing on AI-driven automation — using tools like Cursor and Claude
@@ -107,13 +115,7 @@ export default function AuthorLayout({ content }: Props) {
 
           <aside className="about-avatar-card glass-card-lg hero-load-card">
             <div className="avatar-frame">
-              <Image
-                src={avatar}
-                alt={name}
-                width="320px"
-                height="320px"
-                className="avatar-img"
-              />
+              <Image src={avatar} alt={name} width="320px" height="320px" className="avatar-img" />
             </div>
             <div className="avatar-meta">
               <div className="avatar-name">{name}</div>
@@ -155,7 +157,7 @@ export default function AuthorLayout({ content }: Props) {
         </section>
 
         {/* Timeline */}
-        <section className="block reveal" id="career">
+        <section className="reveal block" id="career">
           <div>
             <div className="section-label">02 · career</div>
             <h2 className="section-title">
@@ -179,7 +181,7 @@ export default function AuthorLayout({ content }: Props) {
         </section>
 
         {/* Stack */}
-        <section className="block reveal" id="stack">
+        <section className="reveal block" id="stack">
           <div>
             <div className="section-label">03 · stack</div>
             <h2 className="section-title">
@@ -201,7 +203,7 @@ export default function AuthorLayout({ content }: Props) {
         </section>
 
         {/* Education */}
-        <section className="block reveal" id="education">
+        <section className="reveal block" id="education">
           <div>
             <div className="section-label">04 · education</div>
             <h2 className="section-title">

@@ -32,11 +32,7 @@ const MobileNav = () => {
           strokeLinejoin="round"
           aria-hidden="true"
         >
-          {navShow ? (
-            <path d="M6 6l12 12M6 18L18 6" />
-          ) : (
-            <path d="M3 6h18M3 12h18M3 18h18" />
-          )}
+          {navShow ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
         </svg>
       </button>
       <div className={`mobile-nav-panel ${navShow ? 'open' : ''}`} aria-hidden={!navShow}>

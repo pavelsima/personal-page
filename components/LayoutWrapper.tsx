@@ -15,9 +15,7 @@ const LayoutWrapper = ({ children }: Props) => {
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document
-        .querySelectorAll('.reveal, .stagger')
-        .forEach((el) => el.classList.add('in'))
+      document.querySelectorAll('.reveal, .stagger').forEach((el) => el.classList.add('in'))
       return
     }
     const io = new IntersectionObserver(

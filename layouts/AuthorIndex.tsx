@@ -32,9 +32,9 @@ export default function AuthorIndex({ content, posts }: Props) {
             I'm Pavel — primarily a <strong>frontend developer</strong> with 9+ years of
             professional experience, and <strong>Vue.js</strong> as my main stack. I can go{' '}
             <strong>full-stack</strong> when a project needs it — Node.js, Laravel, and the
-            occasional Python or <strong>RedwoodJS</strong> on the side. <strong>React</strong>{' '}
-            when the project asks for it. Lately I've been deep in AI-driven development with
-            Cursor, Claude Code, and MCP.
+            occasional Python or <strong>RedwoodJS</strong> on the side. <strong>React</strong> when
+            the project asks for it. Lately I've been deep in AI-driven development with Cursor,
+            Claude Code, and MCP.
           </p>
           <div className="cta-row">
             <Link href="/projects">
@@ -53,13 +53,7 @@ export default function AuthorIndex({ content, posts }: Props) {
 
         <aside className="avatar-card glass-card-lg hero-load-card">
           <div className="avatar-frame">
-            <Image
-              src={avatar}
-              alt={name}
-              width="320px"
-              height="320px"
-              className="avatar-img"
-            />
+            <Image src={avatar} alt={name} width="320px" height="320px" className="avatar-img" />
           </div>
           <div className="avatar-meta">
             <div className="avatar-name">{name}</div>
@@ -108,7 +102,7 @@ export default function AuthorIndex({ content, posts }: Props) {
       </section>
 
       {/* Stack */}
-      <section className="block reveal" id="stack">
+      <section className="reveal block" id="stack">
         <div>
           <div className="section-label">01 · stack</div>
           <h2 className="section-title">
@@ -138,7 +132,7 @@ export default function AuthorIndex({ content, posts }: Props) {
       </section>
 
       {/* Writing */}
-      <section className="block reveal" id="writing">
+      <section className="reveal block" id="writing">
         <div className="section-head">
           <div>
             <div className="section-label">02 · writing</div>
@@ -158,9 +152,7 @@ export default function AuthorIndex({ content, posts }: Props) {
             return (
               <Link key={slug} href={`/blog/${slug}`}>
                 <a className="article-card">
-                  <span className="article-card-date">
-                    {formatDate(date, siteMetadata.locale)}
-                  </span>
+                  <span className="article-card-date">{formatDate(date, siteMetadata.locale)}</span>
                   <h3 className="article-card-title">{title}</h3>
                   <p className="article-card-excerpt">{summary}</p>
                   <div className="article-card-tags">
@@ -176,7 +168,7 @@ export default function AuthorIndex({ content, posts }: Props) {
       </section>
 
       {/* Projects teaser */}
-      <section className="block reveal projects-teaser" id="projects-teaser">
+      <section className="reveal projects-teaser block" id="projects-teaser">
         <div className="section-head">
           <div>
             <div className="section-label">03 · work</div>
