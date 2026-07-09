@@ -8,13 +8,20 @@ import '@docsearch/css'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
 
+// Pages that render standalone, without the site header/nav/footer chrome.
+const STANDALONE_PAGES = ['/bottle-temp-calculator']
+
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+  const isStandalone = STANDALONE_PAGES.includes(router.pathname)
+
   return (
     <ThemeProvider
       attribute="data-theme"
@@ -27,9 +34,13 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <SearchProvider searchConfig={siteMetadata.search}>
-        <LayoutWrapper>
+        {isStandalone ? (
           <Component {...pageProps} />
-        </LayoutWrapper>
+        ) : (
+          <LayoutWrapper>
+            <Component {...pageProps} />
+          </LayoutWrapper>
+        )}
       </SearchProvider>
     </ThemeProvider>
   )
