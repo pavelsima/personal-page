@@ -48,17 +48,13 @@ const Card = ({ title, description, imgSrc, href, role, tags, repo }: CardProps)
         )}
         <div className="project-links">
           {href && (
-            <Link href={href}>
-              <a className="more-link">
-                Live <span className="arrow">→</span>
-              </a>
+            <Link href={href} className="more-link">
+              Live <span className="arrow">→</span>
             </Link>
           )}
           {repo && (
-            <Link href={repo}>
-              <a className="more-link">
-                Repo <span className="arrow">→</span>
-              </a>
+            <Link href={repo} className="more-link">
+              Repo <span className="arrow">→</span>
             </Link>
           )}
         </div>

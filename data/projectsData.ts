@@ -3,7 +3,7 @@ export type ProjectType = 'work' | 'personal'
 export interface Project {
   title: string
   description: string
-  imgSrc: string
+  imgSrc?: string
   href: string
   type: ProjectType
   role?: string
@@ -73,6 +73,16 @@ const projectsData: Project[] = [
     role: 'Personal · open source',
     tags: ['React', 'Ionic', 'Capacitor'],
     repo: 'https://github.com/pavelsima/PkuLimiter',
+  },
+  {
+    title: 'Bottle Temp Calculator',
+    description:
+      'Phone-friendly calculator for mixing hot and cold water from thermoses to the right bottle temperature while traveling — enter the current temps and it tells you the ml split in 5ml increments.',
+    imgSrc: '/static/images/bottle-temp-calculator.png',
+    href: '/bottle-temp-calculator',
+    type: 'personal',
+    role: 'Personal · quick utility',
+    tags: ['Next.js', 'TypeScript'],
   },
 ]
 
